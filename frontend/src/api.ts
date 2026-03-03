@@ -39,4 +39,11 @@ export const api = {
     if (!response.ok) throw new Error("Failed to fetch checks");
     return response.json();
   },
+
+  async deleteCheck(id: string): Promise<void> {
+    const response = await fetch(`${API_BASE}/checks/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to delete check");
+  },
 };
