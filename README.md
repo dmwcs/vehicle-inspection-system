@@ -73,17 +73,34 @@ Please answer these briefly:
 
 1. **Authentication:** If we need to add authentication to this system, how would you approach it?
 
+I would use JWT-based authentication. The backend would have a `/auth/login` endpoint that validates credentials and returns an access token (short-lived) and a refresh token. The frontend would store the access token in memory and attach it to API requests via an `Authorization: Bearer` header. An Express middleware would verify the token on protected routes (`/checks`, `/vehicles`). For production, I'd also add role-based access control (e.g., driver vs. fleet manager) and use httpOnly cookies for the refresh token to prevent XSS attacks.
+
 2. **Improvements:** What other improvements would you implement if this were going to production or if you have more time?
+
+- Replace JSON file storage with a proper database (e.g., PostgreSQL)
+- Add pagination for the checks list (currently loads all records at once)
+- Add input validation on the frontend before sending requests (e.g., prevent submitting odometer less than the last recorded reading)
+- Add loading states and error boundaries for better UX
+- Write frontend unit tests (e.g., with React Testing Library)
+- Add a confirmation dialog before deleting and undo support
+- Deploy with Docker and CI/CD pipeline
 
 3. **Tech Stack Experience:** Do you have experience with PHP, Vue.js, or mobile app development (React Native/Flutter)?
 
+No experience with PHP, Vue.js, or mobile app development at this time, but I am open to learning.
+
 4. **AI / Tools:** What tools/assistants did you use while working on this assignment (e.g., GitHub Copilot, ChatGPT, etc.)? We appreciate AI usage, we're interested in _how_ you use these tools.
+
+I used **Claude Code** throughout this assignment. My approach: I first analyzed the codebase structure and came up with the solution myself, then directed Claude Code to implement it. For example, I identified the `hasIssue` bug (wrong status string + inverted boolean) before asking it to fix. I never let AI generate code I don't understand — I reviewed every change for correctness and maintainability before committing. I treated it as a pair-programming partner where I lead the architecture decisions and code review.
 
 5. **Visa Status:** What visa are you currently on?
 
+Subclass 190 (Australian Skilled Nominated visa).
+
 6. **Languages:** What language(s) do you speak and what's your proficiency level?
 
-> **Tip:** You can write your answers directly in this README.md file below each question.
+- Chinese (Mandarin): Native
+- English: Fluent
 
 ---
 
