@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import type { Vehicle, Check } from "./types";
+import type { ToastType } from "./Toast";
 import { api } from "./api";
 
 type IssueFilter = "all" | "true" | "false";
 
 interface Props {
   refreshTrigger?: number;
+  showToast: (message: string, type: ToastType) => void;
 }
 
-export function CheckHistory({ refreshTrigger }: Props) {
+export function CheckHistory({ refreshTrigger, showToast }: Props) {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [selectedVehicle, setSelectedVehicle] = useState("");
   const [hasIssueFilter, setHasIssueFilter] = useState<IssueFilter>("all");
@@ -69,6 +71,19 @@ export function CheckHistory({ refreshTrigger }: Props) {
     if (!vehicleId) {
       setChecks([]);
       setLastFetchedParams(null);
+    }
+  };
+
+  const handleDelete = async (checkId: string) => {
+    if (!window.confirm("Are you sure you want to delete this inspection record?")) {
+      return;
+    }
+    try {
+      await api.deleteCheck(checkId);
+      setChecks((prev) => prev.filter((c) => c.id !== checkId));
+      showToast("Inspection record deleted.", "success");
+    } catch {
+      showToast("Failed to delete record.", "error");
     }
   };
 
@@ -161,6 +176,13 @@ export function CheckHistory({ refreshTrigger }: Props) {
                     <p>{check.note}</p>
                   </div>
                 )}
+
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(check.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}
