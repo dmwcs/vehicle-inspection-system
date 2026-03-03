@@ -174,5 +174,35 @@
     ],
     "hasIssue": false,
     "createdAt": "2026-01-24T04:39:26.109Z"
+  },
+  {
+    "id": "b8b7198d-3293-43a9-9781-3eb615c10945",
+    "vehicleId": "VH001",
+    "odometerKm": 2,
+    "items": [
+      {
+        "key": "TYRES",
+        "status": "OK"
+      },
+      {
+        "key": "BRAKES",
+        "status": "OK"
+      },
+      {
+        "key": "LIGHTS",
+        "status": "OK"
+      },
+      {
+        "key": "OIL",
+        "status": "OK"
+      },
+      {
+        "key": "COOLANT",
+        "status": "OK"
+      }
+    ],
+    "note": "ffff",
+    "hasIssue": false,
+    "createdAt": "2026-03-03T00:47:10.950Z"
   }
 ]
